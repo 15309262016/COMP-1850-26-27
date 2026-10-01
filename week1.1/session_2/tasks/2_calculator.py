@@ -1,13 +1,9 @@
-# Fill out the code to make a very simple calculator
+num1 = int(input("enter your number1:"))
 
-# ask the user to enter number1:
+num2 = int(input("enter your number2: "))
 
+answer =num1+num2
 
-# ask the user to enter number 2:
+print(f"{num1}+{num2}={answer}")
 
-
-# calculate the result of adding those numbers together
-
-
-# print out the answer
-
+print("please enter numbers only.")
