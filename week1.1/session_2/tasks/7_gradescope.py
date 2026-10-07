@@ -12,14 +12,11 @@
 # Add to your code so that if they entered something other than an integer it prints
 # 'That is not a number' and exits.
 
-first_number = input("Enter the first number: ")
-second_number = input("Enter the second number: ")
-
 try:
-    num1 = int(first_number)
-    num2 = int(second_number)
+    num1 = int(input("Enter the first number: "))
+    num2 = int(input("Enter the second number: "))
     result = num1 * num2
-    print(f"The result is: {result}")
+    print(result)
 except ValueError:
     print("That is not a number")
     exit()
