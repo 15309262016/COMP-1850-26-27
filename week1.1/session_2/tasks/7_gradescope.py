@@ -12,8 +12,8 @@
 # Add to your code so that if they entered something other than an integer it prints
 # 'That is not a number' and exits.
 
-first_number = 10
-second_number = 5
+first_number = input("Enter the first number: ")
+second_number = input("Enter the second number: ")
 
 try:
     num1 = int(first_number)
