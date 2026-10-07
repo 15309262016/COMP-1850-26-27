@@ -12,13 +12,15 @@
 # Add to your code so that if they entered something other than an integer it prints
 # 'That is not a number' and exits.
 
-
-num1 = int(input("Enter the first number: "))
-num2 = int(input("Enter the second number: "))
-result = num1 * num2
+try:
+    num1 = int(input("Enter the first number: "))
+    num2 = int(input("Enter the second number: "))
+    result = num1 * num2
+except ValueError:
+    print("That is not a number")
+    exit()
 print(result)
-print("That is not a number")
-exit()
+
 
 # Download your file, and upload it to the 'Week 1 Session 2 - Practice Upload' task on Minerva.
 # You will get some feedback - ensure you are passing the tests
