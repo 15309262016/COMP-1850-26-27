@@ -3,10 +3,10 @@
 
 # Predefined credentials
 
-correct_username = "user123"
-correct_password = "password456"
+correct_username = "1"
+correct_password = "2"
 two_factor_enabled = True
-correct_2fa_code = "7890"
+correct_2fa_code = "3"
 
 # Ask user for their username and password
 
@@ -15,14 +15,14 @@ password = input("Enter your password: ")
 
 # Conditional block for login authentication
 
-if XXX:
-    if XXX:
+if username == correct_username and password == correct_password:
+    if two_factor_enabled:
         two_factor_code = input("Enter the 2FA code sent to your device: ")
-        if XXX:
-            print("Login successful! Welcome!")
+        if two_factor_code == correct_2fa_code :
+         print("Login successful! Welcome!")
         else:
-            print("Invalid two-factor authentication code. Access denied.")
+           print("Invalid two-factor authentication code. Access denied.")
     else:
-        print("Login successful! Welcome!")
+       print("Login successful! Welcome!")
 else:
     print("Invalid username or password. Access denied.")
