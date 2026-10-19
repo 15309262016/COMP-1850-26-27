@@ -1,21 +1,36 @@
 # Worksheet 1.3: Task 3
 
-# Your code for the overall grade classification
+import csv
 
-# ask for filename of the student file
+input_file_name = input()
 
-# open the file
+with open(input_file_name, newline="", encoding="utf-8") as input_file:
+	reader = csv.reader(input_file)
+	next(reader, None)
 
-# read in the data, and for each student calculate their average grade and classification
+	results = []
+	for row in reader:
+		if not row:
+			continue
 
+		student_id = row[0]
+		grades = [int(grade) for grade in row[1:] if grade.strip()]
+		average_grade = sum(grades) / len(grades)
 
+		if average_grade >= 70:
+			classification = "1"
+		elif average_grade >= 60:
+			classification = "2:1"
+		elif average_grade >= 50:
+			classification = "2:2"
+		elif average_grade >= 40:
+			classification = "3"
+		else:
+			classification = "F"
 
-# write out this calculated data in the format without a header:
-#      student_id,average_grade,classification - replace this with actual value
-#      The average grade should be given to 2 decimal places
-#      this can be achieved by using the following in an fstring: {variable_name:.2f}
+		results.append((student_id, f"{average_grade:.2f}", classification))
 
-
-# write this data out to a file named input_file_name + _out.csv - e.g. the input file name 'student_data.csv' -> 'student_data.csv_out.csv'
-
-# You can compare your output files with the 4 example files in example_outfiles folder
+output_file_name = input_file_name + "_out.csv"
+with open(output_file_name, "w", newline="", encoding="utf-8") as output_file:
+	writer = csv.writer(output_file, lineterminator="\n")
+	writer.writerows(results)

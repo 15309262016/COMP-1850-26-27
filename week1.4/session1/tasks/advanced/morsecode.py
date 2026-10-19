@@ -31,6 +31,15 @@ def string_to_morse_code(string):
              '.': '.-.-.-', '-': '-....-', '+': '.-.-.',  '"': '.-..-.',
              '?': '..--..', '/': '-..-.'}
 
+    morse_chars = []
+    for char in string:
+        key = char.upper()
+        if key not in mcode:
+            raise ValueError(f"Unsupported character: {char!r}")
+        morse_chars.append(mcode[key])
+
+    return " ".join(morse_chars)
+
 
 # test data
 
