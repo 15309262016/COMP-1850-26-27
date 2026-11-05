@@ -3,9 +3,14 @@
 animals = ['dog','cat','hamster','goldfish']
 
 not_fish = [item for item in animals if item != 'goldfish']
-
 print(not_fish)
 
+not_fish_2 = []
+for item in animals:
+    if item != 'goldfish':
+        not_fish_2.append(item)
 
-# write the equivalent for loop to create the not_fish list from animals
-# print your result to verify it is the same
+print(not_fish_2)
+print(not_fish == not_fish_2)
+
+# This is equivalent to the list comprehension above.

@@ -13,5 +13,8 @@ for i in values:
 
 print(newval)
 
-# write the list comprehension equivalent to the `for` loop
+newval_comp = [2 * i if i % 2 == 0 else i for i in values]
+print(newval_comp)
+
+# This is the equivalent list comprehension to the for loop above.
 

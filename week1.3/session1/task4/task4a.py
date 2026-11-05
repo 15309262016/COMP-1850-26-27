@@ -2,12 +2,11 @@
 
 sum = 0
 
-for k in range(1,10):
+for k in range(0, 21, 2):
     sum = sum + k ** 2
+    print(f"Running total: {sum}")
 
-print(sum)
+print(f"Final sum: {sum}")
 
-
-# modify the code to sum the squares of even numbers up to and including 20
-
-# modify the code to print the sum at each iteration
+# This sums the squares of even numbers up to and including 20
+# and prints the running total at each iteration.

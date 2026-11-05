@@ -1,58 +1,76 @@
 
 # PGM functions that we write
 
-def readPGM( filename ):
+def readPGM(filename):
     ''' 
     Read a named PGM file and store the data in a tuple.
     Input: filename string
     Output: tuple of PGM image data
     '''
+    with open(filename, "r", encoding="utf-8") as f:
+        tokens = []
+        for line in f:
+            if line.strip().startswith('#'):
+                continue
+            tokens.extend(line.split())
 
-    with open(filename,"r") as f:    # read in the file
-        data = f.readlines()
-        
-    data = [line.strip().split() for line in data[1:]] # clean the space-separated data, skip the first line
-          
-    width = int(data[0][0]) # store the data - compare to the text in the file
-    height = int(data[0][1])
-    max_gray = int(data[1][0])
-    pixels = [[int(data[2+i][j]) for j in range(width)] for i in range(height)] # nested list comprehension for pixel array
-    
-    return width,height,max_gray,pixels   # tuple of PGM data
-    
-def writePGM( filename, image ):
+    if not tokens or tokens[0] != 'P2':
+        raise ValueError("This function expects a P2 PGM file.")
+
+    width = int(tokens[1])
+    height = int(tokens[2])
+    max_gray = int(tokens[3])
+    pixels = []
+    index = 4
+
+    for _ in range(height):
+        row = []
+        for _ in range(width):
+            row.append(int(tokens[index]))
+            index += 1
+        pixels.append(row)
+
+    return width, height, max_gray, pixels
+
+
+def writePGM(filename, image):
     '''
     Write a PGM file to disk
     Input: filename string, image tuple data
     Output: None
     '''
-    width,height,max_gray,pixels = image  # unpack the tuple
+    width, height, max_gray, pixels = image
 
-    # open a file for writing
-    # write the data in PGM format
-    # don't forget the PGM code "P2"
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write("P2\n")
+        f.write(f"{width} {height}\n")
+        f.write(f"{max_gray}\n")
+
+        for row in pixels:
+            f.write(" ".join(str(pixel) for pixel in row) + "\n")
 
     return
 
-def invertPGM( image ):
+
+def invertPGM(image):
     '''
     Invert an image, ie. pixel value = 255 - pixel value
     Input: image data
     Output: inverted image data
     '''
-    width,height,max_gray,pixels = image  # unpack the tuple
+    width, height, max_gray, pixels = image
+    inverted = [[max_gray - value for value in row] for row in pixels]
+    return width, height, max_gray, inverted
 
-    # your code
-    # create a new pixel array of inverted data 
-    inverted = []  # you can use a similar nested comprehension to the readPGM() function
-    
-    return width,height,max_gray,inverted
 
 # code to test the PGM functions
 
 image = readPGM("images/feep.pgm")
-
 print(f"Image with width {image[0]} and height {image[1]}")
-print(f"{image[3]}")
+print(f"First pixel row: {image[3][0]}")
+
+inverted = invertPGM(image)
+writePGM("images/inverted_feep.pgm", inverted)
+print("Inverted image written to images/inverted_feep.pgm")
 
 # write further code to test your own functions
